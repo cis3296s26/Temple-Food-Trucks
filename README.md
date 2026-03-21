@@ -29,3 +29,12 @@ Follow this project board to know the latest status of the project: [http://...]
 - Specify additional library to download if needed 
 - What file and target to compile and run. 
 - What is expected to happen when the app start. 
+
+# FOR BACKEND DEVELOPMENT: 
+1. cd to backend/
+2. Create a python virtual environment using the following command:
+    "python3 -m venv venv"
+3. Activate the environment: 
+    - For Windows: "source venv\Scripts\activate" 
+    - For Linux: "source venv/bin/activate"
+4. Now, run "pip install -r requirements.txt"
