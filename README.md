@@ -31,9 +31,7 @@ Follow this project board to know the latest status of the project: [http://...]
 - What is expected to happen when the app start. 
 
 # Backend Developer Setup
-1. 
- - Have Docker Desktop installed
- - Have Git installed
+1. Have Docker Desktop installed
 
 2. Build and start the containers by running:
     "docker compose up --build -d"
