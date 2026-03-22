@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.cointrib.gis',
     "app" # if we end up changing the name of the app folder, change it here too
 ]
 
