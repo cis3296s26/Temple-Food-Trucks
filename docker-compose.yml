@@ -15,7 +15,7 @@ services:
     volumes:
       - ./backend:/app
     ports:
-      - "8080:8080"
+      - "8000:8000"
     environment:
     - DATABASE_URL=postgresql://user:password@db:5432/foodtruckDB
     depends_on:
