@@ -53,3 +53,10 @@ To add a library: add it to backend/requirements.txt and run docker compose up -
 If you change a model, run the following commands:
     "docker compose exec web python manage.py makemigrations" and 
     "docker compose exec web python manage.py migrate"
+
+If you get "Problem loading page" error in your browser, run "docker compose restart web" 
+
+For Linux users getting "Problem Loading page" 
+"docker compose down"
+"docker network prune -f"
+"docker compose up -d"
