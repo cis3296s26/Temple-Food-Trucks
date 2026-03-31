@@ -4,16 +4,15 @@ export default function TruckCard({truckName}){
     return (
         <>
         <div className="flex justify-center"> {/* Keep this for now so that the box is centered */}
-            <div className="bg-blue-500 mb-4 w-5/12 rounded-4xl border-4 m-5 "> {/* This is to stylize the content inside the box */}
-                <div className="bg-amber-800 h-9/12 rounded-t-4xl"> 
-                    {/*this is an image placeholder*/}
-                </div>
-                
-                <div className="">
+            <div className="bg-blue-500 mb-4 w-5/12 rounded-4xl border-4 m-5 overflow-hidden"> {/* This is to stylize the content inside the box */}
+                <div className="bg-amber-800 h-64 rounded-t-4xl"> {/*this is an image placeholder*/}
 
-                    <h1 className="text-center">{truckName}</h1> {/*This is the parameter for the food truck*/}
+                </div>
+                <div className="p-4">
+
+                    <h1 className="text-center p-2">{truckName}</h1> {/*This is the parameter for the food truck*/}
                     <hr/>
-                    <p>This is the description for the food truck. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sunt odio quis cum commodi ullam harum velit atque culpa quod molestias nihil amet quam sapiente, exercitationem sit optio saepe aliquam cupiditate.</p>
+                    <p className="wrap-break-word">This is the description for the food truck. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sunt odio quis cum commodi ullam harum velit atque culpa quod molestias nihil amet quam sapiente, exercitationem sit optio saepe aliquam cupiditate.</p>
                 </div>  
             </div>     
         </div> 
