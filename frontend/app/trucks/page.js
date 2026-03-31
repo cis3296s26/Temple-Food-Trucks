@@ -2,11 +2,13 @@
 
 // importing components
 import TruckCard from "../components/TruckCard";
+import { PageMain } from "../components/PageMain";
 
 const trucks = ["halal", "teppanyaki", "bagel hut", "bob"];
 
 export default function AllTrucksPage() {
   return (
+    <PageMain>
     <div>
       <h1>All Trucks</h1>
       <ul>
@@ -15,5 +17,6 @@ export default function AllTrucksPage() {
         ))}
       </ul>
     </div>
+    </PageMain>
   );
 }
