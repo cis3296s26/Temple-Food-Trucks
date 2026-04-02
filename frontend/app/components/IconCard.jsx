@@ -1,18 +1,28 @@
 import {
     MapPin,
-    Phone
+    Phone, 
+    Hamburger
 } from "lucide-react"
+
+import IconPopup from "./IconPopup"
 
 export default function IconCard({location}){
     return (
         <div>
-            <div className="flex flex-row">
-                <MapPin></MapPin>
-                <p>{location}</p>
-            </div>
-            <div className="flex flex-row">
-                <Phone></Phone>
-                <p>{location}</p>
+            <div className="flex flex-wrap gap-2 justify-center">
+                <div className="relative">
+                    <div className="group inline-block">
+                        <MapPin className="w-20 h-10 cursor-pointer"></MapPin>
+                        
+                        <span className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 hidden group-hover:block transition-opacity  bg-white bg-gradient-to-b from to-gray-300 text-black text-2xl rounded-2xl px-2 py-2"> {/* this is for the hovering effect over the icon */}
+                            <IconPopup></IconPopup>
+                        </span>
+                        
+                    </div>
+                </div>
+                {/* <p>{location}</p> this is to add text for whatever is in location in TruckCard.jsx */}
+                <Phone className="w-20 h-10"></Phone>
+                <Hamburger className="w-20 h-10"></Hamburger>
             </div>
         </div>
     )
