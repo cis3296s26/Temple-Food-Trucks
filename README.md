@@ -60,3 +60,12 @@ For Linux users getting "Problem Loading page"
 "docker compose down"
 "docker network prune -f"
 "docker compose up -d"
+
+# If you ran a bugged version of the migrations (backend):
+1. run 'docker compose down -v' (wipes buggy tables)
+2. in backend/app/migrations/, DELETE 0001_initial.py (if you haven't pulled from the working branch)
+3. Once you run those, then run "git pull origin backend"
+4. run 'docker compose up -d'
+5. IMPORTANT: WAIT 20 SECONDS
+6. run the NEW migrations: docker compose exec web python manage.py migrate
+7. create super user: docker compose exec web python manage.py createsuperuser
