@@ -4,9 +4,9 @@ import { PageMain } from "../components/PageMain";
 export default function Home() {
   return (
     <PageMain>
-      <h1 className="text-5xl font-semibold" >Temple Food Trucks!</h1>
+      <h1 className="text-5xl font-semibold" >What is Temple Food Trucks?</h1>
       <hr className="m-10 text-gray-500 w-11/12"></hr>
-      <h1><b>TODO: </b>this page should show open trucks, with links to see all the trucks</h1>
+      <h1 className="self-start"><i>A New Way To Find Food On Campus</i></h1>
     </PageMain>
   );
 }
