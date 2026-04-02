@@ -2,6 +2,7 @@
 
 // importing components
 import TruckCard from "../components/TruckCard";
+import { PageMain } from "../components/PageMain";
 
 const trucks = ["halal", "teppanyaki", "bagel hut", "bob", "test1", "test2", "test3"];
 
