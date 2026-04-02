@@ -1,5 +1,19 @@
-export default function IconCard(){
+import {
+    MapPin,
+    Phone
+} from "lucide-react"
+
+export default function IconCard({location}){
     return (
-        <img src="/images/locationmark.png" alt="Location" className="w-10 h-10" />
+        <div>
+            <div className="flex flex-row">
+                <MapPin></MapPin>
+                <p>{location}</p>
+            </div>
+            <div className="flex flex-row">
+                <Phone></Phone>
+                <p>{location}</p>
+            </div>
+        </div>
     )
 }
