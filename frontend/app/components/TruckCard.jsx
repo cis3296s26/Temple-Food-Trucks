@@ -1,5 +1,6 @@
 import IconCard from "./IconCard"
 import Link from "next/link"
+import StoreStatus from "./StoreStatus"
 
 export default function TruckCard({truckName}){
     // hi
@@ -9,9 +10,12 @@ export default function TruckCard({truckName}){
             <div > {/* This is to stylize the content and the individual card */}
                 <div className="bg-amber-800 h-64 rounded-t-4xl relative"> {/*this is an image placeholder*/}
                     <div className="w-30 h-10 absolute bottom-2 right-2"> {/* you need relative in the parent div with absolute as child to control the positioning */}
-                        <svg viewBox="0 0 24 24" className="w-20 h-7 stroke-1.3 stroke-black"> 
+                        {/* <svg viewBox="0 0 24 24" className="w-20 h-7 stroke-1.3 stroke-black"> this creates a star for rating
                             <path fill="yellow" d="M12 2 L15 9 L22 9 L17 14 L19 21 L12 17 L5 21 L7 14 L2 9 L9 9 Z"></path>
-                        </svg>
+                        </svg> */}
+                        <div className="flex flex-wrap justify-center absolute bottom-50 border-3 border-black bg-white w-30 h-10 rounded-2xl overflow-hidden">
+                            <StoreStatus></StoreStatus>
+                        </div>
                     </div>
                 </div>
 
