@@ -7,7 +7,7 @@ export default function SignUpDesign(){
             <div className="absolute top-0 left-0">
                 <ColorChange/>
             </div>
-                <div className="relative bg-blue-500 w-200 h-150 rounded-4xl p-12 shadow-2xl shadow-cyan-500"> {/*Relative allows the circle to be hidden behind the blue box */}
+                <div className="relative bg-blue-500 w-200 h-150 rounded-4xl m-10 p-12 shadow-2xl shadow-cyan-300"> {/*Relative allows the circle to be hidden behind the blue box */}
                     <h1 className="font-[Georgia] font-bold text-4xl">Sign Up</h1>
                     <div className="flex flex-wrap justify-center m-2 p-5 gap-7">
                         <div className="bg-white w-120 h-10 rounded-4xl">
@@ -27,7 +27,7 @@ export default function SignUpDesign(){
                         </div>
 
                         <div className="bg-black w-120 h-15 m-4 p-2 rounded-4xl overflow-hidden">
-                            <button className="text-white flex justify-center p-1 w-full hover:bg-white hover:text-black">
+                            <button className="text-white flex justify-center p-1 w-full hover:scale-150 hover:shadow-xl duration-300 transition-all hover:bg-white hover:text-black">
                                 <p className="font-bold text-3xl">Sign Up</p>
                                 </button>
                         </div>
