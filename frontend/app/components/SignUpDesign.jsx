@@ -1,4 +1,5 @@
 import ColorChange from "./ColorChange";
+import TruckAnimation from "./TruckAnimation";
 
 export default function SignUpDesign(){
     return(
@@ -7,7 +8,13 @@ export default function SignUpDesign(){
             <div className="absolute top-0 left-0">
                 <ColorChange/>
             </div>
-                <div className="relative bg-blue-500 w-200 h-150 rounded-4xl m-10 p-12 shadow-2xl shadow-cyan-300"> {/*Relative allows the circle to be hidden behind the blue box */}
+            {/* <div className="absolute top-0 left-0">
+                <TruckAnimation></TruckAnimation>
+            </div> */}
+                <div className="relative bg-blue-500 w-200 h-170 rounded-4xl m-10 p-25 shadow-2xl shadow-cyan-300"> {/*Relative allows the circle to be hidden behind the blue box */}
+                    <div className="absolute top-0 left-0">
+                        <TruckAnimation className=""></TruckAnimation>
+                    </div>
                     <h1 className="font-[Georgia] font-bold text-4xl">Sign Up</h1>
                     <div className="flex flex-wrap justify-center m-2 p-5 gap-7">
                         <div className="bg-white w-120 h-10 rounded-4xl">
