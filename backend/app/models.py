@@ -8,6 +8,7 @@ class FoodTruck(models.Model):
     location = models.PointField() # Map location of the food truck
     # TODO: Need more fields for what defines a Food Truck
     priceRange = models.CharField(max_length=100)
+    status = models.BooleanField(default=True) # Whether the food truck is currently active or not
 
     def __str__(self):
         return self.name
