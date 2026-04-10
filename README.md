@@ -67,8 +67,19 @@ For Linux users getting "Problem Loading page"
 3. Once you run those, then run "git pull origin backend"
 4. run 'docker compose up -d'
 5. IMPORTANT: WAIT 20 SECONDS
-6. run the NEW migrations: docker compose exec web python manage.py migrate
-7. create super user: docker compose exec web python manage.py createsuperuser
+6. run: docker compose exec web python manage.py makemigrations
+7. run the NEW migrations: docker compose exec web python manage.py migrate
+8. create super user: docker compose exec web python manage.py createsuperuser
 
 # If you want to save log data locally
 run "docker compose exec web python manage.py dumpdata app --indent 2 > localDataBackup.json"
+
+# If your changes are not updating in the cloud
+1. Check what django is speaking to by running
+docker compose exec web python manage.py shell -c "from django.conf import settings; print(settings.DATABASES['default']['HOST'])"
+
+2. if it says 'db', .env and settings.py didn't apply properly
+
+3. make sure your .env file's DATABASE_URL is pointing to the Neon link
+
+4. Make sure settings.py DATABASES points to the .env file's DATABASE_URL
