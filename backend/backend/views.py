@@ -8,3 +8,8 @@ from app.serializer import FoodTruckSerializer
 class FoodTruckList(generics.ListCreateAPIView):
     queryset = FoodTruck.objects.all()
     serializer_class = FoodTruckSerializer
+
+# This class defines a view for retrieving, updating, and deleting a specific FoodTruck
+class FoodTruckDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = FoodTruck.objects.all()
+    serializer_class = FoodTruckSerializer
