@@ -10,12 +10,10 @@ export default function SearchBar(){
                 </div>
                 
                 <div className="text-black p-2 bg-green-500 rounded-4xl w-2/12 h-10 border-3">
-                    <div className="flex justify-center">
-                        <button className="flex gap-2 focus:outline-none font-[Trebuchet MS] ">
-                            Filter
-                            <Search></Search>
-                        </button>
-                    </div>
+                    <button className="flex justify-center gap-2 focus:outline-none font-[Trebuchet MS] w-full cursor-pointer">
+                        Filter
+                        <Search></Search>
+                    </button>
                 </div>
             </div>
         </div>

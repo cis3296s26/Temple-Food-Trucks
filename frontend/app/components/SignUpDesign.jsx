@@ -16,7 +16,7 @@ export default function SignUpDesign(){
 
     return(
         <>
-        <div className="flex justify-center relative m-4 overflow-y-clip">
+        <div className="flex justify-center relative m-4 overflow-y-clip min-h-screen">
             <div className="absolute top-0 left-0">
                 <ColorChange/>
             </div>
