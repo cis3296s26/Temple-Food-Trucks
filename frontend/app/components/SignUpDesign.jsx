@@ -11,7 +11,7 @@ export default function SignUpDesign(){
 
     function SignUp_info(e){ 
         e.preventDefault();
-        router.push("/signup_info");
+        router.push("/signup/user_or_trucks");
     }
 
     return(
