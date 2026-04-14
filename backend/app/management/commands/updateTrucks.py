@@ -9,7 +9,7 @@ from app.models import FoodTruck
 
 # This command is used to close food trucks that are past their closing time
 class Command(BaseCommand):
-    help = 'Closes food trucks that are past their closing time'
+    help = 'Closes food trucks that are past their closing time, or opens food trucks that are past their opening time and not before their closing time'
 
     # This function is called when the command is run
     def handle(self, *args, **kwargs):
