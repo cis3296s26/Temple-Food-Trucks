@@ -31,7 +31,7 @@ export default function SignUpInfoDesign(){
 
                     <div className="bg-black w-120 h-15 m-4 p-2 rounded-4xl overflow-hidden">
                         <button className="text-white flex justify-center p-1 w-full hover:scale-150 hover:shadow-xl duration-300 transition-all hover:bg-white hover:text-black">
-                            <p className="font-bold text-3xl">Sign Up</p>
+                            <p className="font-bold text-3xl">Register</p>
                             </button>
                     </div>
                 </div>

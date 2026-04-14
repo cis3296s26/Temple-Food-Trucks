@@ -166,3 +166,40 @@ body {
     transform: translateY(-150px);
   }
 }
+
+.animate-custortruck {
+  position: relative;
+  isolation: isolate;
+  animation: animate-custortruck 1s linear infinite; 
+}
+
+@keyframes animate-custortruck{
+  0% {
+    transform: translateY(0); /* start at origin position */
+  } 
+  10% {
+    transform: translateY(10px); /* goes down the y-axis */
+  }
+  50% { 
+    transform: translateY(-20px); /* goes up the y-axis */
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* Save this just in case you want to change the customer icon animation */
+/* .animate-custortruckUser {
+  position: relative;
+  isolation: isolate;
+  animation: animate-custortruckUser 1s linear infinite;
+}
+
+@keyframes animate-custortruckUser {
+  0% {
+    transform: translate(0);
+  }
+  100% {
+    transform: translate(0);
+  }
+} */
