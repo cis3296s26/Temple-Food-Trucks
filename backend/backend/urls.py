@@ -26,5 +26,6 @@ urlpatterns = [
     # List view for all food trucks
     path('foodtrucks/', FoodTruckList.as_view(), name='foodtruck-list'),
     # Detail view for a specific food truck, identified by its primary key (pk)
-    path('trucks/<int:pk>/', views.FoodTruckDetail.as_view(), name='foodtruck-detail'),
+    # for example, /foodtrucks/1/ would retrieve the details of the food truck with ID=1
+    path('foodtrucks/<int:pk>/', views.FoodTruckDetail.as_view(), name='foodtruck-detail'),
 ]
