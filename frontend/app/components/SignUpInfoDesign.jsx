@@ -9,13 +9,27 @@ export default function SignUpInfoDesign(){
 
     const [typefood, settypefood] = useState("");
     const [foodlist, setfoodlist] = useState([]);
+    const [visiblebutton, setvisiblebutton] = useState(false);
 
 
     function addFood(){
         if(typefood.trim() === "") return;
 
-        setfoodlist([...foodlist, typefood]);
+        setfoodlist([...foodlist, {name: typefood, color1: randomColor(), color2: randomColor() }]);
         settypefood("");
+    }
+
+    function removeFood(index){
+        setfoodlist(foodlist.filter((_, i) => i !== index)); 
+    }
+
+    function randomColor(){
+        const colors = [
+            "#40E0D0", "#00FFFF", "#00BFFF", "#7DF9FF",
+            "#0070BB"
+        ]
+
+        return colors[Math.floor(Math.random() * colors.length)];
     }
 
 
@@ -43,32 +57,35 @@ export default function SignUpInfoDesign(){
 
                 </div>
 
-                <div className="flex flex-col justify-center bg-red-300 w-full rounded-3xl m-2 overflow-hidden">
-                        <h1 className="flex flex-wrap justify-center font-[Georgia] font-semibold text-[30px]">Type of Food</h1>
-                    
-                    <div className="flex flex-wrap justify-center m-2 p-7 gap-7">
+                <div>
+                    <div className="flex flex-col justify-center bg-red-300 w-full rounded-3xl m-2 p-4 overflow-hidden">
+                        <h1 className="font-[Georgia] font-semibold text-[30px]">Type of Food</h1>
                         
-                        <div>
+                        <div className="flex flex-col items-center justify-center m-2 p-5 gap-5">
+                            
                             <div className="bg-white w-150 h-10 rounded-4xl">
                                 <input 
                                     placeholder="Type of Food"
                                     type="text" 
                                     value={typefood} 
                                     onChange={(e) => settypefood(e.target.value)} 
-                                    onKeyDown={(e) => e.key === "Enter" && addFood()} //This is for when the  user want to press the enter key instead of using the add button 
+                                    onKeyDown={(e) => e.key === "Enter" && addFood()} // This is for when the  user want to press the enter key instead of using the add button 
                                     className="text-black focus:outline-none flex p-2 w-full"/>
                             </div>
                             
                             <Typefoodbutton onClick={addFood}> Add </Typefoodbutton>
+
+                            <div className="flex flex-wrap gap-2">
+                                {foodlist.map((fooditem, index) => (
+                                    <span key={index} style={{ background: `linear-gradient(to top left, ${fooditem.color1}, ${fooditem.color2})` }} className="relative group px-5 p-4 border-4 border-cyan-100 rounded-2xl text-white text-2xl"> 
+                                        <button className="group-hover:opacity-0">{fooditem.name} </button>
+                                        <button onClick={() => removeFood(index)} className="absolute left-1/2 -translate-x-1/2 cursor-pointer font-bold opacity-0 group-hover:opacity-100 hover:scale-200 duration-300"> X </button>
+                                    </span>
+                                ))}
+                            </div>
                         </div>
 
-                        <div className="flex flex-wrap gap-2 mt-4">
-                            {foodlist.map((fooditem, index) => (
-                                <span key={index} className="bg-white px-3 py-1 rounded-full text-black"> {fooditem} </span>
-                            ))}
-                        </div>
                     </div>
-
                 </div>
 
                  <button className="absolute left-85 bg-black w-120 h-15 m-4 p-2 rounded-4xl overflow-hidden text-white flex justify-center hover:scale-110 hover:shadow-xl duration-300 transition-all hover:bg-white hover:text-black cursor-pointer">
