@@ -85,3 +85,7 @@ docker compose exec web python manage.py shell -c "from django.conf import setti
 
 # To create a login JWT token
 docker compose exec web python manage.py shell -c "from django.core.signing import TimestampSigner; print(TimestampSigner(salt='signup-salt').sign(''))"
+
+# To create a QR code
+
+"docker compose exec web python makeQR.py"
