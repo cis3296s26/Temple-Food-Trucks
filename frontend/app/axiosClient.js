@@ -22,7 +22,7 @@ const axiosClient = async (path, data, accessToken = null, type = "POST") => {
     
     let res;
     if (type == "POST") {
-      var res = await axios.post(
+      res = await axios.post(
         endpoint,
         data,
         {
@@ -32,13 +32,13 @@ const axiosClient = async (path, data, accessToken = null, type = "POST") => {
         },
       );
     } else if (type == "GET") {
-      var res = await axios.get(endpoint, {
+      res = await axios.get(endpoint, {
         headers: {
           Authorization: `JWT ${accessToken}`,
         },
       });
     }
-
+    
     return res.data;
   } catch (err) {
     console.log(`${type} request failed to ${path}`);
