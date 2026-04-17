@@ -5,7 +5,7 @@ export default function Home() {
     <PageMain>
       <h1 className='text-5xl font-semibold' >What is Temple Food Trucks?</h1>
       <hr className='m-10 text-white w-11/12'></hr>
-      <h1 className='text-4xl'><i>A New Way To Find Food On Campus</i></h1>
+      <h1 className='text-4xl mb-5'><i>A New Way To Find Food On Campus</i></h1>
       <p className="mb-4 text-base leading-relaxed">
       Temple Food Trucks is a project developed by Temple students for the Temple community. 
       This website aims to help both food truck owners and food truck fanatics such as ourselves.

@@ -14,6 +14,10 @@ export default function Home() {
       <hr className="my-8 border-t border-gray-300" />
       <h1 className='text-4xl font-serif' >Mexican Trucks</h1>
       <hr className="my-8 border-t border-gray-300" />
+      <h1 className='text-4xl font-serif'>Breakfast Trucks</h1>
+      <hr className="my-8 border-t border-gray-300" />
+      <h1 className='text-4xl font-serif'>Drink/Dessert Trucks</h1>
+      <hr className="my-8 border-t border-gray-300" />
       <h1 className='text-4xl font-serif'>Cheap Trucks</h1>
       <h1 className='text-1xl font-serif'>These trucks are typically under $10</h1>
     </PageMain>
