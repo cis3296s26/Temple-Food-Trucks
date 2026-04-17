@@ -3,6 +3,7 @@
 import { useState } from "react";
 import ColorChange from "./ColorChange";
 import TruckAnimation from "./TruckAnimation";
+import { useRouter } from "next/navigation";
 
 // We pass 'onSubmit' as a prop so the parent (page.js) can handle the API call
 export default function SignUpDesign({ onSubmit }) {
