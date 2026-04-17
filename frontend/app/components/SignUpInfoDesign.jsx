@@ -4,6 +4,7 @@ import { FolderDot } from "lucide-react";
 import MiniPopUpInfo from "./MiniPopUpInfo";
 import { useState } from "react";
 import { Typefoodbutton } from "./Typefoodbutton";
+import TruckAnimation from "./TruckAnimation";
 
 export default function SignUpInfoDesign(){
 
@@ -36,14 +37,17 @@ export default function SignUpInfoDesign(){
     return(
         <>
         <div className="flex flex-wrap justify-center relative m-4">
-            <div className="relative bg-linear-to-r from transparent via-blue-300 to-transparent w-300 h-570 rounded-4xl m-10 p-25 shadow-2xl shadow-cyan-300"> {/*Relative allows the circle to be hidden behind the blue box */}
+            <div className="relative bg-linear-to-r from-transparent via-blue-300 to-transparent w-300 h-570 rounded-4xl m-5 p-25 shadow-2xl shadow-cyan-300"> {/*Relative allows the circle to be hidden behind the blue box */}
                 {/* <div className="absolute top-0 left-0">
                     <TruckAnimation className=""></TruckAnimation>
                 </div> */}
-                <MiniPopUpInfo className="relative"></MiniPopUpInfo>
-                <h1 className="font-[Georgia] font-bold text-4xl p-7">Food Truck Customization</h1>
+                <div className="absolute z-0 left-85 top-65">
+                    <h1 className="font-[Georgia] font-bold text-4xl p-7">Food Truck Customization</h1>
+                </div>
+                <TruckAnimation className="animate-truck2 overflow-hidden z-0"/>
+                <MiniPopUpInfo className="relative z-10"></MiniPopUpInfo>
                 
-                <div className="flex flex-col bg-green-500 rounded-3xl w-full m-2 p-10 overflow-hidden">
+                <div className="flex flex-col bg-blue-500 rounded-3xl w-full m-2 p-10 overflow-hidden">
                     
                     <h1 className="font-[Georgia] font-semibold text-[30px]">Truck's Description</h1>
                     
@@ -57,8 +61,8 @@ export default function SignUpInfoDesign(){
 
                 </div>
 
-                <div>
-                    <div className="flex flex-col justify-center bg-red-300 w-full rounded-3xl m-2 p-4 overflow-hidden">
+                <div className="mt-30">
+                    <div className="flex flex-col justify-center bg-green-300 w-full rounded-3xl m-2 p-4 overflow-hidden">
                         <h1 className="font-[Georgia] font-semibold text-[30px]">Type of Food</h1>
                         
                         <div className="flex flex-col items-center justify-center m-2 p-5 gap-5">
