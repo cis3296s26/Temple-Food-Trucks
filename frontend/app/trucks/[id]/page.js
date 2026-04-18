@@ -1,3 +1,11 @@
+"use client"
+
+// imports from next
+import { useParams } from "next/navigation";
+import { useEffect, useState } from "react";
+
+// imports from components
+import axiosClient from "@/app/axiosClient";
 import TruckCarousel from "../../components/TruckCarousel";
 import { PageMain } from "../../components/PageMain";
 
@@ -8,18 +16,34 @@ import {
   Phone,
   ForkKnife,
   StarIcon,
+  Info,
+  Mail, 
 } from "lucide-react";
 
-export default async function TruckDetailPage({ params }) {
-  const { truckDetail } = await params;
+export default function TruckDetailPage() {
+  const [truck, setTruck] = useState({});
+  const {id} = useParams()
+
+  useEffect(() => {
+    async function getTruck() {
+      const res = await axiosClient(`foodtrucks/${id}`, null, "", "GET");
+      console.log(res);
+      setTruck(res || {});
+      console.log(truck)
+    }
+
+    getTruck();
+  }, []);
 
   const listItems = [
+    { icon: Info, label: truck.status},
     { icon: MapPin, label: "test" },
-    { icon: Clock, label: "test" },
-    { icon: LucideCircleDollarSign, label: "test" },
+    { icon: Clock, label: `${truck.openingTime} - ${truck.closingTime}` },
+    { icon: LucideCircleDollarSign, label: truck.priceRange },
     { icon: Phone, label: "test" },
-    { icon: ForkKnife, label: "test" },
+    { icon: ForkKnife, label: truck.foodType }, 
     { icon: StarIcon, label: "test" },
+    { icon: Mail, label: truck.owner}
   ];
 
   const iconSize = 48;
@@ -27,7 +51,7 @@ export default async function TruckDetailPage({ params }) {
 
   return (
     <PageMain>
-      <h1 className="text-5xl font-semibold">{truckDetail}</h1>
+      <h1 className="text-5xl font-semibold">{truck.name}</h1>
       <hr className="my-10 text-gray-500 w-full"></hr>
       <div className="flex flex-row items-center justify-around">
         <h2 className="w-2/3 text-2xl">

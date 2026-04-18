@@ -6,19 +6,14 @@ import StoreStatus from "./StoreStatus";
 
 export default function TruckCard({ truck }) {
   const truckName = truck.name;
-
-  const startTime = getDateOutOfTimeString(truck.openingTime);
-  const endTime = getDateOutOfTimeString(truck.closingTime);
-  const currentDate = new Date();
-  const isOpen = startTime < currentDate && currentDate < endTime;
-
+  const isOpen = truck.status
   const foodType = truck.foodType;
-
   const description = truck.description || "Description Not Provided ".repeat(10)
+  const id = truck.id
 
   return (
     <Link
-      href={`/trucks/${truckName}`}
+      href={`/trucks/${id}`}
       className="bg-blue-500 mb-4 w-3/12 rounded-4xl border-4 m-4 overflow-hidden hover:scale-105 hover:shadow-xl transition-all duration-300 shadow-2xl"
     >
       <div>
