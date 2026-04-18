@@ -1,9 +1,22 @@
+"use client"
+
 import Image from 'next/image';
 
+import { useEffect } from 'react';
 import {PageMain} from './components/PageMain';
 import TruckCard from './components/TruckCard';
+import axiosClient from './axiosClient';
 
 export default function Home() {
+    useEffect(() => {
+      async function allTrucks() {
+        const res = await axiosClient("filter_trucks?search=halal", null, "", "GET");
+        console.log(res)
+      }
+  
+      allTrucks();
+    }, []);
+  
   return (
       <PageMain><h1 className = 'text-5xl font-serif'>Temple Food Trucks! </h1>
       <hr className='my-8 border-t border-gray-300'></hr> <h1> <b>TODO: </b>this page should show open trucks, with links to see all the trucks</h1>
