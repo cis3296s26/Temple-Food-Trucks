@@ -14,38 +14,38 @@ export default function Home() {
 
       <h1 className="text-4xl font-serif">Popular Trucks</h1>
       <TruckCardList
-        request={["filter_trucks?search=icantdothisyet", null, "", "GET"]}
+        request={["foodtrucks?search=icantdothisyet", null, "", "GET"]}
       />
       <h1 className="text-1xl font-serif">Rate Your Favorites!!!</h1>
       <hr className="my-8 border-t border-gray-300" />
 
       <h1 className="text-4xl font-serif">Halal Trucks</h1>
       <TruckCardList
-        request={["filter_trucks?search=halal", null, "", "GET"]}
+        request={["foodtrucks?search=halal", null, "", "GET"]}
       />
       <hr className="my-8 border-t border-gray-300" />
 
       <h1 className="text-4xl font-serif">Mexican Trucks</h1>
       <TruckCardList
-        request={["filter_trucks?search=mexican", null, "", "GET"]}
+        request={["foodtrucks?search=mexican", null, "", "GET"]}
       />
       <hr className="my-8 border-t border-gray-300" />
 
       <h1 className="text-4xl font-serif">Breakfast Trucks</h1>
       <TruckCardList
-        request={["filter_trucks?search=breakfast", null, "", "GET"]}
+        request={["foodtrucks?search=breakfast", null, "", "GET"]}
       />
       <hr className="my-8 border-t border-gray-300" />
 
       <h1 className="text-4xl font-serif">Drink/Dessert Trucks</h1>
       <TruckCardList
-        request={["filter_trucks?search=dessert", null, "", "GET"]}
+        request={["foodtrucks?search=dessert", null, "", "GET"]}
       />
       <hr className="my-8 border-t border-gray-300" />
 
       <h1 className="text-4xl font-serif">Cheap Trucks</h1>
       <TruckCardList
-        request={["filter_trucks?search=cheap", null, "", "GET"]}
+        request={["foodtrucks?search=cheap", null, "", "GET"]}
       />
       <h1 className="text-1xl font-serif">
         These trucks are typically under $10
