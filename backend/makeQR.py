@@ -6,6 +6,7 @@ import qrcode
 
 # Debug statement
 print(f"CWD: {os.getcwd()}", flush=True)
+print(os.getenv('SECRET_KEY'))
 
 sys.path.append(os.getcwd())
 
@@ -20,11 +21,13 @@ def generate_owner_qr():
         # Setup Django
         django.setup()
         
-        signer = TimestampSigner()
+        signer = TimestampSigner(salt='signup-salt')
         token = signer.sign('')
         
         # Construct URL for frontend
-        signup_url = f"http://localhost:3000/signup?token={token}"
+        # When we deploy, we have to change 
+        deployed_url = os.getenv('FRONTEND_URL', 'http://localhost:3000')
+        signup_url = f"{deployed_url}/signup?token={token}"
 
         # Generate QR code
         qr = qrcode.QRCode(version=1, box_size=10, border=5)
