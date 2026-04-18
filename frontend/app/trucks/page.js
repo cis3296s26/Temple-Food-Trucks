@@ -16,11 +16,15 @@ export default function AllTrucksPage() {
         description="The full list of every Food Truck that has registered with us. You can filter by name, type of truck to find exactly what you're looking for!"
       />
 
-      <SearchBar />
+      <SearchBar onSubmit={test} />
       <TruckCardList
         title="All Trucks"
         request={["foodtrucks/", null, "", "GET"]}
       />
     </PageMain>
   );
+}
+
+function test(){
+  console.log("hey")
 }
