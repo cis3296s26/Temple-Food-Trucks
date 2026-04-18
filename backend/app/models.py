@@ -28,5 +28,21 @@ class FoodTruck(models.Model):
         blank = True
     )
 
+    # Field for storing an image of the food truck. The image will be uploaded to the 'food_truck_images/' directory in the media folder
+    image = models.ImageField(upload_to='food_truck_images/', null=True, blank=True) 
+
     def __str__(self):
         return self.name
+
+# Model to store additional images for a food truck, allowing for a gallery of images to be associated with each truck. 
+# Each image is linked to a specific food truck using .foreignKey
+class FoodTruckImageGallery(models.Model):
+    food_truck = models.ForeignKey(
+        FoodTruck,
+        on_delete=models.CASCADE,
+        related_name='gallery_images'
+    )
+    image = models.ImageField(upload_to='food_truck_gallery_images/')
+
+    def __str__(self):
+        return f"Image for {self.food_truck.name} uploaded"
