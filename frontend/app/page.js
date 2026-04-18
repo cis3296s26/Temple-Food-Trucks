@@ -14,14 +14,14 @@ export default function Home() {
 
       <h1 className="text-4xl font-serif">Popular Trucks</h1>
       <TruckCardList
-        request={["foodtrucks?search=icantdothisyet", null, "", "GET"]}
+        request={["foodtrucks", null, "", "GET"]}
       />
       <h1 className="text-1xl font-serif">Rate Your Favorites!!!</h1>
       <hr className="my-8 border-t border-gray-300" />
 
       <h1 className="text-4xl font-serif">Halal Trucks</h1>
       <TruckCardList
-        request={["foodtrucks?search=halal", null, "", "GET"]}
+        request={["foodtrucks?foodtype=halal,status=open", null, "", "GET"]}
       />
       <hr className="my-8 border-t border-gray-300" />
 

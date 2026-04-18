@@ -1,11 +1,12 @@
-"use client"
+"use client";
 
 import { useEffect, useState } from "react";
 
 import Navbar from "./Navbar";
+import Background from "./Background";
 
-export function PageMain({children}) {
-  const [bgColor, setBGColor] = useState(getBackgroundColor(0))
+export function PageMain({ children }) {
+  const [bgColor, setBGColor] = useState(getBackgroundColor(0));
 
   useEffect(() => {
     const handleScroll = () => {
@@ -13,33 +14,37 @@ export function PageMain({children}) {
     };
 
     window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
     <>
-    <div 
-      style={{backgroundColor: bgColor}}
-      className={`pt-18 relative flex min-h-screen flex-col items-center h-fit pb-12 justify-center px-15`}
-    >
-      <Navbar></Navbar>
-      <main className="grow my-5 text-center">{children}</main>
-    </div>
+      <Background />
+
+      <div
+        style={{ backgroundColor: bgColor }}
+        className="relative z-10 pt-18 flex min-h-screen flex-col items-center pb-12 px-15 bg-black"
+      >
+        <Navbar />
+
+        <main
+          className="grow text-center w-full m-0 p-5"
+        >
+          {children}
+        </main>
+      </div>
     </>
-  );  
+  );
 }
 
 const getBackgroundColor = (scroll) => {
-  const min = 175;
-  const max = 215;
+  const min = 150;
+  const max = 200;
 
   const speed = 0.05;
 
   let green = Math.floor(Math.min(max, min + scroll * speed));
-  let blue = Math.floor(Math.max(min, max - scroll * speed))
+  let blue = Math.floor(Math.max(min, max - scroll * speed));
 
-  return `rgb(150, ${green}, ${blue})`;
+  return `rgba(50, ${green}, ${blue}, 0.75)`;
 };
