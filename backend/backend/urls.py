@@ -25,8 +25,8 @@ from django.conf.urls.static import static
 urlpatterns = [
     # Admin site URL
     path('admin/', admin.site.urls),
-    # List view for all food trucks (api endpoint)
-    path('foodtrucks/', FoodTruckList.as_view(), name='foodtruck-list'),
+    # List view for all food trucks
+    path('foodtrucks/', views.get_trucks, name='foodtrucks'),
     # Detail view for a specific food truck, identified by its primary key (pk)
     # for example, /foodtrucks/1/ would retrieve the details of the food truck with ID=1
     path('foodtrucks/<int:pk>/', views.FoodTruckDetail.as_view(), name='foodtruck-detail'),
