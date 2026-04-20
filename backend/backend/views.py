@@ -73,6 +73,7 @@ def verify_invite_and_signup(request):
         signer.unsign(token, max_age=86400)
     except (SignatureExpired, Exception):
         return JsonResponse({'error': 'Invalid or expired token'}, status=403)
+    
 # This class defines a view for listing and creating FoodTrucks
 # It uses Django REST Framework's generics to provide functionality for handling GET and POST requests
 class FoodTruckList(generics.ListCreateAPIView):
@@ -93,3 +94,25 @@ class FoodTruckDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = FoodTruckSerializer
     # Set permissions to allow only authenticated users to read, and only the owner to edit or delete
     permission_classes = [permissions.IsAuthenticatedOrReadOnly, ownerOrReadOnly]
+
+@api_view(['GET'])
+def get_trucks(request):
+    name = request.GET.get("name", '')
+    foodtype = request.GET.get("foodtype", '')
+    status = request.GET.get("status", '')
+    price = request.GET.get("price", '')
+    # ratings = request.GET.get("ratings", '')
+    
+    queryset = FoodTruck.objects.all()
+    
+    if name:
+        queryset = queryset.filter(name__icontains=name)
+    if foodtype:
+        queryset = queryset.filter(foodType__icontains=foodtype)
+    if status:
+        queryset = queryset.filter(status__icontains=status)
+    if price:
+        queryset = queryset.filter(price__icontains=price)
+    
+    serializer = FoodTruckSerializer(queryset, many=True)
+    return Response(serializer.data)
