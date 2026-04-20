@@ -1,3 +1,11 @@
+"use client"
+
+// imports from next
+import { useParams } from "next/navigation";
+import { useEffect, useState } from "react";
+
+// imports from components
+import axiosClient from "@/app/axiosClient";
 import TruckCarousel from "../../components/TruckCarousel";
 import { PageMain } from "../../components/PageMain";
 
@@ -8,45 +16,41 @@ import {
   Phone,
   ForkKnife,
   StarIcon,
+  Info,
+  Mail, 
 } from "lucide-react";
 
-export default async function TruckDetailPage({ params }) {
-  const { truckDetail } = await params;
+export default function TruckDetailPage() {
+  const [truck, setTruck] = useState({});
+  const {id} = useParams()
 
-  // Fetch the truck details from the backend API
-  const baseUrl = process.env.NEXT_PUBLIC_DJANGO_URL || 'http://localhost:8000';
-  
-  const res = await fetch(`${baseUrl}/foodtrucks/${truckDetail}/`, {
-    cache: 'no-store'
-  });
+  useEffect(() => {
+    async function getTruck() {
+      const res = await axiosClient(`foodtrucks/${id}`, null, "", "GET");
+      console.log(res);
+      setTruck(res || {});
+      console.log(truck)
+    }
 
-  const truck = await res.json();
-
-
-  if (!truck) {
-    return (
-      <PageMain>
-        <h1 className="text-5xl font-semibold">Food Truck Not Found</h1>
-        <hr className="my-10 text-gray-500 w-full"></hr>
-        <p className="text-2xl">The food truck does not exist.</p>
-      </PageMain>
-    );
-  }
+    getTruck();
+  }, []);
 
   const listItems = [
-    { icon: MapPin, label: "test" },
-    { icon: Clock, label: `${truck.openingTime.slice(0, 5)} - ${truck.closingTime.slice(0, 5)}` },    
-    { icon: LucideCircleDollarSign, label: truck.priceRange },    
+    { icon: Info, label: truck.status},
+    { icon: MapPin, label: truck.location },
+    { icon: Clock, label: `${truck.openingTime} - ${truck.closingTime}` },
+    { icon: LucideCircleDollarSign, label: truck.priceRange },
     { icon: Phone, label: "test" },
-    { icon: ForkKnife, label: truck.foodType },    
+    { icon: ForkKnife, label: truck.foodType }, 
     { icon: StarIcon, label: "test" },
+    { icon: Mail, label: truck.owner}
   ];
 
   const iconSize = 48;
   const iconColor = "black";
 
   return (
- <PageMain>
+    <PageMain>
       <h1 className="text-5xl font-semibold">{truck.name}</h1>
       <hr className="my-10 text-gray-500 w-full"></hr>
       <div className="flex flex-row items-center justify-around">
