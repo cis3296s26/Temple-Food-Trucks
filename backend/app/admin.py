@@ -8,7 +8,7 @@ class GalleryInLine(admin.TabularInline):
 @admin.register(FoodTruck)
 class FoodTruckAdmin(admin.ModelAdmin):
     inlines = [GalleryInLine]
-    list_display = ('name', 'foodType', 'phoneNumber', 'dietaryRestrictions', 'popularity', 'priceRange', 'status', 'openingTime', 'closingTime')
+    list_display = ('name', 'foodType', 'phoneNumber', 'dietaryRestrictions', 'popularity', 'priceRange', 'priceRangeArray', 'status', 'openingTime', 'closingTime')
 
     # Add filters for status and price range
     list_filter = ('status', 'priceRange')

@@ -21,16 +21,16 @@ import {
 
 export default function TruckDetailPage() {
   const [dietaryRestrictions, setDietaryRestrictions] = useState([]);
+  const [priceRangeArray, setPriceRangeArray] = useState(['?', '?']);
   const [truck, setTruck] = useState({});
   const { id } = useParams();
 
   useEffect(() => {
     async function getTruck() {
       const res = await axiosClient(`foodtrucks/${id}/`, null, "", "GET");
-      console.log(res);
       setTruck(res || {});
-      console.log(res.dietaryRestrictions);
       setDietaryRestrictions(res.dietaryRestrictions);
+      setPriceRangeArray(res.priceRangeArray);
       console.log(truck);
     }
 
@@ -41,7 +41,7 @@ export default function TruckDetailPage() {
     { icon: Info, label: truck.status },
     { icon: MapPin, label: truck.location },
     { icon: Clock, label: `${truck.openingTime} - ${truck.closingTime}` },
-    { icon: LucideCircleDollarSign, label: truck.priceRange },
+    { icon: LucideCircleDollarSign, label: `$${priceRangeArray[0]} - $${priceRangeArray[1]}` },
     { icon: Phone, label: truck.phoneNumber },
     { icon: ForkKnife, label: truck.foodType },
     { icon: StarIcon, label: `${truck.popularity}/5` },
