@@ -54,7 +54,7 @@ export default function TruckDetailPage() {
       <h1 className="text-5xl font-semibold">{truck.name}</h1>
       <hr className="my-10 text-gray-500 w-full"></hr>
       <div className="flex flex-row items-center justify-around">
-        <h2 className="w-2/3 text-2xl leading-relaxed">
+        <h2 className="w-2/3 text-3xl leading-relaxed">
           {truck.description}
         </h2>
       {/* The Dynamic Image Container */}
