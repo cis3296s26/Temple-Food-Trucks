@@ -135,6 +135,27 @@ export default function SignUpInfoDesign(){
                         </div>
                     </div>
 
+                    {/* Price Range */}
+                    <div className="mt-20">
+                        <div className="flex flex-col bg-orange-500 rounded-3xl w-full m-2 p-10 overflow-hidden">
+                            
+                            <h1 className="font-[Georgia] font-semibold text-[30px]">Price Range($)</h1>
+                            
+                            <div className="flex flex-wrap justify-center m-2 p-7 gap-7">
+                                <div className="bg-white w-20 h-10 rounded-4xl flex flex-wrap">
+                                    <input type="number" min="0" max="9999" placeholder="Min" required className="text-black focus:outline-none flex p-2 w-full"></input>
+                                </div>
+                                
+                                <p className="flex flex-wrap justify-center items-center text-2xl">to</p>
+
+                                <div className="bg-white w-20 h-10 rounded-4xl flex flex-wrap">
+                                    <input type="number" min="0" max="9999" placeholder="Max" required className="text-black focus:outline-none flex p-2 w-full"></input>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+
                     {/* Primary Image */}
                     <div className="mt-20 bg-yellow-400 p-4 rounded-4xl">
                         <h1 className="font-[Georgia] font-semibold text-[30px] m-2">Truck's Image</h1>
