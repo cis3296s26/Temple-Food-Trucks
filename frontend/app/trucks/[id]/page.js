@@ -57,7 +57,7 @@ export default function TruckDetailPage() {
       <div className="flex flex-row items-center justify-around">
         <h2 className="w-2/3 text-3xl leading-relaxed">{truck.description}</h2>
         {/* The Dynamic Image Container */}
-        <div className="w-3/12 h-auto border-2 border-black rounded-xl overflow-hidden shadow-lg">
+        <div className="w-3/12 h-auto border-2 border-black rounded-xl overflow-hidden shadow-lg bg-amber-800">
           {truck.image ? (
             <img
               className="w-full h-full object-cover"

@@ -28,8 +28,11 @@ export default function AllTrucksPage() {
   );
 }
 
-function getRequestFromSearchBar(e, setRequest){
-  const formData = new FormData(e.target)
-  const value = formData.get("name")
-  setRequest(`?name=${value}`)
+function getRequestFromSearchBar(formData, setRequest){
+  let query = "?"
+  for(let key in formData){
+    let value = formData[key] || ""
+    query += `${key}=${value}&`
+  }
+  setRequest(query)
 }
