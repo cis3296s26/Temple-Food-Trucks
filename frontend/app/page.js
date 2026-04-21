@@ -14,9 +14,9 @@ export default function Home() {
 
       <h1 className="text-4xl font-serif">Popular Trucks</h1>
       <TruckCardList
-        request={["foodtrucks/?foodtype=ratingsdolater", null, "", "GET"]}
+        request={["foodtrucks/?popularity=3.5", null, "", "GET"]}
       />
-      <h1 className="text-1xl font-serif">Rate Your Favorites!!!</h1>
+      <h1 className="text-1xl font-serif"><i>Listed Trucks have a rating of 3.5 or more</i></h1>
       <hr className="my-8 border-t border-gray-300" />
 
       <h1 className="text-4xl font-serif">Halal Trucks</h1>
