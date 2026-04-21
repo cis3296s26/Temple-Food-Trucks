@@ -1,6 +1,7 @@
 from django.contrib.gis.db import models
 from django.utils import timezone
 from django.conf import settings
+from django.contrib.postgres.fields import ArrayField
 
 # Food truck model with fields for name, food type, location, and active status
 
@@ -12,6 +13,9 @@ class FoodTruck(models.Model):
     name = models.CharField(max_length=150)
     description = models.CharField(max_length=1000)
     foodType = models.CharField(max_length=100)
+    phoneNumber = models.CharField(max_length=15)
+    dietaryRestrictions = ArrayField(models.CharField(max_length=20), size=5)
+    popularity = models.FloatField()
     location = models.CharField(max_length=200)
     priceRange = models.CharField(max_length=100)
     status = models.CharField(max_length=10, choices=statusChoices, default='OPEN') # Whether the food truck is currently open or closed
