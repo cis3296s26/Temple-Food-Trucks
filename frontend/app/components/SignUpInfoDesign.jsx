@@ -46,12 +46,14 @@ export default function SignUpInfoDesign(){
     }
 
     function addmoreimg(e){
-        setallimg([...allimg, e]);
-        importImg(e);
+        const files = Array.from(e.target.files);
+        const imageUrls = files.map(file => URL.createObjectURL(file));
+
+        setallimg(prev => [...prev, ...imageUrls]);
     }
 
     const handleSubmit = (e) => {
-        e.preventDefault;
+        e.preventDefault();
     }
 
 
@@ -90,7 +92,7 @@ export default function SignUpInfoDesign(){
                     </div>
 
                     {/* Type of Food */}
-                    <div className="mt-20">
+                    <div className="mt-10">
                         <div className="flex flex-col bg-red-500 rounded-3xl w-full m-2 p-10 overflow-hidden">
                             
                             <h1 className="font-[Georgia] font-semibold text-[30px]">Type of Foods</h1>
@@ -104,7 +106,7 @@ export default function SignUpInfoDesign(){
                     </div>
 
                     {/* Dietary Restrictions */}
-                    <div className="mt-20">
+                    <div className="mt-10">
                         <div className="flex flex-col justify-center bg-green-300 w-full rounded-3xl m-2 p-4 overflow-hidden">
                             <h1 className="font-[Georgia] font-semibold text-[30px]">Dietary Restrictions</h1>
                             
@@ -136,7 +138,7 @@ export default function SignUpInfoDesign(){
                     </div>
 
                     {/* Price Range */}
-                    <div className="mt-20">
+                    <div className="mt-10">
                         <div className="flex flex-col bg-orange-500 rounded-3xl w-full m-2 p-10 overflow-hidden">
                             
                             <h1 className="font-[Georgia] font-semibold text-[30px]">Price Range($)</h1>
@@ -157,7 +159,7 @@ export default function SignUpInfoDesign(){
                     </div>
 
                     {/* Primary Image */}
-                    <div className="mt-20 bg-yellow-400 p-4 rounded-4xl">
+                    <div className="mt-10 bg-yellow-400 p-4 rounded-4xl">
                         <h1 className="font-[Georgia] font-semibold text-[30px] m-2">Truck's Image</h1>
                         <div className="flex flex-wrap justify-center items-center bg-gray-400 rounded-3xl w-full h-50 overflow-hidden">
                             
@@ -170,15 +172,15 @@ export default function SignUpInfoDesign(){
                     </div>
 
                     {/* All Images */}
-                    <div className="mt-20 bg-purple-400 p-4 rounded-4xl">
+                    <div className="mt-10 bg-purple-400 p-4 rounded-4xl">
                         <h1 className="font-[Georgia] font-semibold text-[30px] m-2">Additional Truck Images</h1>
                         <div className="flex flex-wrap justify-center items-center bg-gray-400 rounded-3xl w-full h-50 overflow-hidden">
                             
                         <input type="file" accept="image/*" onChange={importpriImg} className="cursor-pointer"/>
 
-                        {primage && (
-                            <img src={primage} alt="Upload Preview" className="w-full" />
-                        )}
+                        {allimg.map((img, index) => (
+                            <img key={index} src={img} alt="Upload Preview" className="w-full" />
+                        ))}
                         </div>
                     </div>
 
