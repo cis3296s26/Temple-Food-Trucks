@@ -1,15 +1,20 @@
 import axios from "axios";
 
 const axiosClient = async (path, data, accessToken = null, type = "POST") => {
-  const endpoint = process.env.NEXT_PUBLIC_DJANGO_URL + path;
+  // baseURL  must end with a slash
+  const baseUrl = process.env.NEXT_PUBLIC_DJANGO_URL.endsWith('/') 
+    ? process.env.NEXT_PUBLIC_DJANGO_URL 
+    : `${process.env.NEXT_PUBLIC_DJANGO_URL}/`;
+    
+  // Ensure path does not start with a slash to avoid double slashes in the url
+  const endpoint = baseUrl + path;
 
-  console.log(endpoint);
-
+  // configure headers, including Authorization if accessToken is provided
   const config = {
     headers: {
-      ...(accessToken && { Authorization: `JWT ${accessToken}` }),
+      ...(accessToken && { Authorization: `Bearer ${accessToken}` }),
     },
-    withCredentials: true,
+    withCredentials: false,
   };
 
   try {
@@ -22,13 +27,13 @@ const axiosClient = async (path, data, accessToken = null, type = "POST") => {
       res = await axios.get(endpoint, config);
     }
     else if (type === "PUT"){
-      res = await axios.put(endpoint, config)
+      // 'data' is for saving user data
+      res = await axios.put(endpoint, data, config);
     }
 
     return res.data;
   } catch (err) {
-    console.log(`${type} request failed to ${path}`);
-    console.log(err);
+    console.error(`${type} request failed to ${path}`, err.response?.data);
     throw err;
   }
 };
