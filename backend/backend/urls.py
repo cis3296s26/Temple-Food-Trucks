@@ -20,11 +20,15 @@ from django.urls import path, include
 from .views import verify_signup, FoodTruckList, FoodTruckDetail, generate_invite_link, verify_invite_and_signup
 from django.conf import settings
 from django.conf.urls.static import static
+from rest_framework_simplejwt.views import ( TokenObtainPairView, TokenRefreshView,)
 
 # Define URL patterns for the backend application
 urlpatterns = [
     # Admin site URL
     path('admin/', admin.site.urls),
+    # JWT Login endpoints
+    path('api/login/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     # List view for all food trucks
     path('foodtrucks/', views.get_trucks, name='foodtrucks'),
     # Detail view for a specific food truck, identified by its primary key (pk)
