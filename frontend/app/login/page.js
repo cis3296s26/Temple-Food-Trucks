@@ -6,11 +6,14 @@ import { PageMain } from "../components/PageMain";
 import SignUpDesign from "../components/SignUpDesign";
 
 
+// This is the login page component that renders the login form and handles user authentication
 export default function Login() {
+  // value and onChange handlers for the login form inputs
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
 
+  // This function is called when the login form is submitted
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
@@ -40,9 +43,10 @@ export default function Login() {
     }
   };
 
+// Styling component
 return (
     <PageMain>
-      <SignUpDesign></SignUpDesign>
+      <SignUpDesign> </SignUpDesign>
     </PageMain>
   );
 }
