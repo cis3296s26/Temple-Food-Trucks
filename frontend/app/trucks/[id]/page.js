@@ -53,13 +53,32 @@ export default function TruckDetailPage() {
 
   const listItems = [
     { icon: Info, label: truck.status },
-    { icon: MapPin, label: truck.location },
+    {
+      icon: MapPin,
+      label: truck.location,
+      onclick: () => {
+        window.open(
+          `https://www.google.com/maps/search/${truck.location}`,
+          "_blank",
+        );
+      },
+    },
     { icon: Clock, label: `${truck.openingTime} - ${truck.closingTime}` },
     {
       icon: LucideCircleDollarSign,
       label: `$${priceRangeArray[0]} - $${priceRangeArray[1]}`,
     },
-    { icon: Phone, label: truck.phoneNumber },
+    {
+      icon: Phone,
+      label: truck.phoneNumber,
+      onclick: () => {
+        navigator.clipboard.writeText(truck.phoneNumber);
+        setNotification({
+          message: "Copied Phone Number To Clipboard!",
+          color: "blue",
+        });
+      },
+    },
     { icon: ForkKnife, label: truck.foodType },
     { icon: StarIcon, label: `${truck.popularity}/5` },
   ];
@@ -106,8 +125,14 @@ export default function TruckDetailPage() {
 
         <div className="lg:col-span-2 bg-white/50 rounded-2xl max-w-1/2 shadow-md border p-6">
           <ul className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            {listItems.map(({ icon: Icon, label }, i) => (
-              <li key={i} className="flex items-center gap-4 m-5">
+            {listItems.map(({ icon: Icon, label, onclick }, i) => (
+              <li
+                key={i}
+                onClick={onclick}
+                className={`flex items-center gap-2 m-2 border p-3 rounded-lg transition-transform duration-200 ${
+                  onclick ? "hover:scale-105 cursor-pointer" : ""
+                }`}
+              >
                 <div className="p-3 rounded-xl bg-gray-100">
                   <Icon size={iconSize} className="text-gray-700" />
                 </div>
