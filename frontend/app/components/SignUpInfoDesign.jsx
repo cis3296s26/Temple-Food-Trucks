@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Typefoodbutton } from "./Typefoodbutton";
 import TruckAnimation from "./TruckAnimation";
 import MiniPopUpInfo from "./MiniPopUpInfo";
@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 import axiosClient from "../axiosClient";
 import NotificationBanner from "./NotificationBanner";
 
-export default function SignUpInfoDesign() {
+export default function SignUpInfoDesign({ truckData }) {
   const router = useRouter();
 
   const [typefood, settypefood] = useState("");
@@ -19,8 +19,44 @@ export default function SignUpInfoDesign() {
 
   const [notification, setNotification] = useState(null);
 
+  useEffect(() => {
+    if (Object.keys(truckData).length > 0) {
+      // we got a real truck here
+      console.log(truckData);
+      truckData["minPrice"] = truckData["priceRangeArray"][0];
+      truckData["maxPrice"] = truckData["priceRangeArray"][1];
+      delete truckData.owner;
+      delete truckData.popularity;
+      delete truckData.priceRangeArray;
+
+      let inputs = document.getElementsByTagName("input");
+      for (let input of inputs) {
+        if (input.name == "dietaryRestrictions") {
+          for (const dietRestrict of truckData["dietaryRestrictions"]) {
+            settypefood(dietRestrict);
+            addFood();
+          }
+        } 
+        else if (input.type == "file") {
+          setprimage(truckData[input.name])
+          input.src = truckData[input.name]
+        }
+        else{
+          input.value = truckData[input.name];
+        }
+      }
+
+      let textareas = document.getElementsByTagName("textarea");
+      for (let textarea of textareas) {
+        textarea.value = truckData[textarea.name];
+      }
+    }
+  }, [truckData]);
+
   function addFood(e) {
-    e.preventDefault();
+    if (e) {
+      e.preventDefault();
+    }
     if (typefood.trim() === "") return;
     setfoodlist([
       ...foodlist,
@@ -82,26 +118,31 @@ export default function SignUpInfoDesign() {
       }
     });
 
+    // if truck data exists, its a put, else, it's a post
+    const typeOfRequest = truckData ? "PUT" : "POST";
+
     try {
       const res = await axiosClient(
         "create_food_truck/",
         formData,
         null,
-        "POST",
+        typeOfRequest,
       );
 
-      router.push(`/trucks/${res.id}?isNew=1`);
+      let url = `/trucks/${res.id}`
+      if(!truckData){url += "?isNew=1"}
+      
+      router.push(url);
     } catch (err) {
       setNotification({
         message: "Sorry, Truck Was Not Created | " + err.message,
         color: "red",
-        duration: 5000
+        duration: 5000,
       });
     }
   }
   return (
     <div className="flex justify-center p-6 min-h-screen">
-
       {notification && (
         <NotificationBanner
           duration={notification.duration}
@@ -128,7 +169,12 @@ export default function SignUpInfoDesign() {
           {/* General */}
           <Section title="Truck Information" color="bg-blue-500">
             <input name="name" type="text" placeholder="Truck Name" required />
-            <input name="phoneNumber" type="text" placeholder="Phone Number" required />
+            <input
+              name="phoneNumber"
+              type="text"
+              placeholder="Phone Number"
+              required
+            />
             <textarea
               name="description"
               placeholder="Description"

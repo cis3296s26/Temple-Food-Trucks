@@ -17,8 +17,12 @@ const axiosClient = async (path, data, accessToken = null, type = "POST") => {
 
     if (type === "POST") {
       res = await axios.post(endpoint, data, config);
-    } else if (type === "GET") {
+    } 
+    else if (type === "GET") {
       res = await axios.get(endpoint, config);
+    }
+    else if (type === "PUT"){
+      res = await axios.put(endpoint, config)
     }
 
     return res.data;

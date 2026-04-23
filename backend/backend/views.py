@@ -77,10 +77,11 @@ def verify_invite_and_signup(request):
         return JsonResponse({'error': 'Invalid or expired token'}, status=403)
 
 
-@api_view(['POST'])
-def create_food_truck(request):
+@api_view(['POST', 'PUT'])
+def create_food_truck(request):     
     data = request.data
-    
+
+    return Response(request.data, 400)
     data.setlist(
         "dietaryRestrictions",
         request.data.getlist("dietaryRestrictions")
@@ -90,7 +91,11 @@ def create_food_truck(request):
     
     data.setlist("priceRangeArray", price_range_array)
     
-    serializer = FoodTruckSerializer(data=data)
+    
+    if(request.method == "PUT"):
+        serializer = FoodTruckSerializer(FoodTruck.objects.get("id"),data=data)
+    else:
+        serializer = FoodTruckSerializer(data=data)
 
     if serializer.is_valid():
         
