@@ -6,11 +6,10 @@ import { PageMain } from "../components/PageMain";
 import SignUpDesign from "../components/SignUpDesign";
 
 
+
 // This is the login page component that renders the login form and handles user authentication
 export default function Login() {
   // value and onChange handlers for the login form inputs
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
   const router = useRouter();
 
   // This function is called when the login form is submitted
@@ -36,7 +35,8 @@ export default function Login() {
         localStorage.setItem("access_token", response.access);
         localStorage.setItem("refresh_token", response.refresh);
 
-        alert("Login Successful!");
+        console.log(response)
+
         // Redirect to the trucks page after successful login
         router.push("/trucks");
       }

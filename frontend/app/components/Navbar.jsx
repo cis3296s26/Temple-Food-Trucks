@@ -6,18 +6,20 @@ import { cn } from "../lib/utils";
 import {
     CircleQuestionMark,
     ForkKnifeCrossedIcon,
-    UserPlus
+    UserPlus,
+    TruckIcon
 } from "lucide-react";
 
 import Link from "next/link";
 
 export default function Navbar() {
-  const isLoggedIn = false;
+  const isLoggedIn = !!localStorage.getItem("access_token")
+  const loginOrCreateFoodTruck = (isLoggedIn) ? {href: "/signup/signup_info", label: "Create A Food Truck", icon: TruckIcon} : { href: "/login", label: "Log In", icon: UserPlus }
 
   const navLinks = [
     { href: "/trucks", label: "All Trucks", icon: ForkKnifeCrossedIcon },
     { href: "/about", label: "About", icon: CircleQuestionMark },
-    { href: "/login", label: "Log In", icon: UserPlus },
+    loginOrCreateFoodTruck
   ];
 
   return (

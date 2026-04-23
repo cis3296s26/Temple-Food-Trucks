@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 import axiosClient from "../axiosClient";
 import NotificationBanner from "./NotificationBanner";
 
-export default function SignUpInfoDesign({ truckData }) {
+export default function SignUpInfoDesign({ truckData, typeOfRequest }) {
   const router = useRouter();
 
   const [typefood, settypefood] = useState("");
@@ -119,18 +119,17 @@ export default function SignUpInfoDesign({ truckData }) {
     });
 
     // if truck data exists, its a put, else, it's a post
-    const typeOfRequest = truckData ? "PUT" : "POST";
 
     try {
       const res = await axiosClient(
         "create_food_truck/",
         formData,
-        null,
+        localStorage.getItem("access_token"),
         typeOfRequest,
       );
 
       let url = `/trucks/${res.id}`
-      if(!truckData){url += "?isNew=1"}
+      if(typeOfRequest=="PUT"){url += "?isNew=1"}
       
       router.push(url);
     } catch (err) {
