@@ -7,6 +7,9 @@ import MiniPopUpInfo from "./MiniPopUpInfo";
 import { useRouter } from "next/navigation";
 import axiosClient from "../axiosClient";
 import NotificationBanner from "./NotificationBanner";
+import {
+  Truck
+} from 'lucide-react'
 
 export default function SignUpInfoDesign() {
   const router = useRouter();
@@ -115,15 +118,15 @@ export default function SignUpInfoDesign() {
         <h1 className="text-4xl font-bold text-center mb-6">
           Food Truck Registration
         </h1>
-
-        <TruckAnimation className="animate-truck2 opacity-100" />
+        <Truck className="animate-pulse scale-200 relative bottom-2 left-10"></Truck>
+        {/* <TruckAnimation className="animate-truck2 opacity-100" /> */}
         {/* <MiniPopUpInfo className="relative z-10"></MiniPopUpInfo> */}
 
         <form
           onSubmit={(e) => {
             create_food_truck(e);
           }}
-          className="space-y-8 -mt-65"
+          className="space-y-8 "
         >
           {/* General */}
           <Section title="Truck Information" color="bg-blue-500">
