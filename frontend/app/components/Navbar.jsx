@@ -1,26 +1,40 @@
-"use client"
+"use client";
 
 import { usePathname } from "next/navigation";
 import { cn } from "../lib/utils";
+import { useEffect, useState } from "react";
 
 import {
-    CircleQuestionMark,
-    ForkKnifeCrossedIcon,
-    UserPlus,
-    TruckIcon
+  CircleQuestionMark,
+  ForkKnifeCrossedIcon,
+  UserPlus,
+  TruckIcon,
 } from "lucide-react";
 
 import Link from "next/link";
 
 export default function Navbar() {
-  const isLoggedIn = !!localStorage.getItem("access_token")
-  const loginOrCreateFoodTruck = (isLoggedIn) ? {href: "/signup/signup_info", label: "Create A Food Truck", icon: TruckIcon} : { href: "/login", label: "Log In", icon: UserPlus }
+  const [navLinks, setNavLinks] = useState([]);
+  const pathname = usePathname();
 
-  const navLinks = [
-    { href: "/trucks", label: "All Trucks", icon: ForkKnifeCrossedIcon },
-    { href: "/about", label: "About", icon: CircleQuestionMark },
-    loginOrCreateFoodTruck
-  ];
+  useEffect(() => {
+    let isLoggedIn = !!localStorage.getItem("access_token")
+    let loginOrCreateFoodTruck = (isLoggedIn)
+      ? {
+          href: "/signup/signup_info",
+          label: "Create A Food Truck",
+          icon: TruckIcon,
+        }
+      : { href: "/login", label: "Log In", icon: UserPlus };
+
+    let navLinksData = [
+      { href: "/trucks", label: "All Trucks", icon: ForkKnifeCrossedIcon },
+      { href: "/about", label: "About", icon: CircleQuestionMark },
+      loginOrCreateFoodTruck,
+    ];
+
+    setNavLinks(navLinksData);
+  }, []);
 
   return (
     <>
@@ -32,14 +46,14 @@ export default function Navbar() {
               href="/"
               className="flex items-center gap-2 text-white font-semibold text-lg tracking-tight hover:opacity-80 transition-opacity"
             >
-              <span className="hidden sm:inline font-serif">Temple Food Trucks</span>
+              <span className="hidden sm:inline font-serif">
+                Temple Food Trucks
+              </span>
             </Link>
 
             {/* Navigation Links */}
             <div className="flex items-center gap-1">
-              {navLinks.map((link) => {
-                return getHTMLFromLinkData(link);
-              })}
+              {navLinks.map((link) => getHTMLFromLinkData(link, pathname))}
             </div>
           </div>
         </div>
@@ -48,8 +62,7 @@ export default function Navbar() {
   );
 }
 
-function getHTMLFromLinkData(link) {
-  const pathname = usePathname();
+function getHTMLFromLinkData(link, pathname) {
   const isActive = pathname === link.href;
 
   return (

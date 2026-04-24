@@ -13,7 +13,7 @@ export default function Login() {
   const router = useRouter();
 
   // This function is called when the login form is submitted
-  const handleLogin = async (formData) => {
+  const onSignupSubmit = async (formData) => {
     try {
       // Prepare the payload for the login request
       const username = formData["username"]
@@ -23,8 +23,6 @@ export default function Login() {
         username: username,
         password: password
       };
-
-      console.log(payload)
 
       // call the login endpoint in urls.py
       const response = await axiosClient("api/login/", payload, "", "POST");
