@@ -31,7 +31,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG') == 'False'
 
-ALLOWED_HOSTS = ['']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -157,11 +157,16 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+RENDER_EXTERNAL_HOSTNAME = os.getenv('RENDER_EXTERNAL_HOSTNAME')
+if RENDER_EXTERNAL_HOSTNAME:
+    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
+
 CORS_ALLOW_ALL_ORIGINS = True
 
 # DO NOT FORGET TO ADD PRODUCTION URL HERE WHEN WE DEPLOY
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
+    "https://*.onrender.com"
 ]
 CORS_ALLOW_CREDENTIALS = True
 
