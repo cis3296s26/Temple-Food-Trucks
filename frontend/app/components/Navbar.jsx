@@ -2,6 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import { cn } from "../lib/utils";
+import { useState, useEffect } from "react";
 
 import {
     CircleQuestionMark,
@@ -13,9 +14,24 @@ import {
 import Link from "next/link";
 
 export default function Navbar() {
-  const isLoggedIn = !!localStorage.getItem("access_token")
-  const loginOrCreateFoodTruck = (isLoggedIn) ? {href: "/signup/signup_info", label: "Create A Food Truck", icon: TruckIcon} : { href: "/login", label: "Log In", icon: UserPlus }
+  // State to track if the user is logged in
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const pathname = usePathname(); 
 
+  // Check for the access token in localStorage on component mount
+  useEffect(() => {
+      const token = localStorage.getItem("access_token");
+      // set the loggedin state based on if there is a token or not
+      setIsLoggedIn(!!token);
+    }, []);
+
+  // If the user is logged in, show the "Create A Food Truck" link, otherwise show the "Log In" link
+  const loginOrCreateFoodTruck = (isLoggedIn) 
+  ? {href: "/signup/signup_info", label: "Create A Food Truck", icon: TruckIcon} 
+  : { href: "/login", label: "Log In", icon: UserPlus }
+
+  // Array of navigation links, including the 
+  // link based on login status
   const navLinks = [
     { href: "/trucks", label: "All Trucks", icon: ForkKnifeCrossedIcon },
     { href: "/about", label: "About", icon: CircleQuestionMark },
@@ -38,7 +54,7 @@ export default function Navbar() {
             {/* Navigation Links */}
             <div className="flex items-center gap-1">
               {navLinks.map((link) => {
-                return getHTMLFromLinkData(link);
+                return getHTMLFromLinkData(link, pathname);
               })}
             </div>
           </div>
