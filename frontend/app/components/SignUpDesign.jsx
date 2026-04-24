@@ -6,11 +6,11 @@ import TruckAnimation from "./TruckAnimation";
 import { useRouter } from "next/navigation";
 
 // We pass 'onSubmit' as a prop so the parent (page.js) can handle the API call
-export default function SignUpDesign({ onSubmit }) {
+export default function SignUpDesign({ onSubmit, nameChange }) {
     // Collects the user's inputted data
     const [formData, setFormData] = useState({
         fullName: "",
-        email: "",
+        username: "",
         password: "",
         confirmPassword: ""
     });
@@ -41,21 +41,21 @@ export default function SignUpDesign({ onSubmit }) {
 
             <form onSubmit={handleSubmit} className="relative bg-linear-to-r from transparent via-blue-300 to-transparent w-200 h-170 rounded-4xl m-10 p-25 shadow-2xl shadow-cyan-300">
                 <div className="absolute top-0 left-0">
-                    <TruckAnimation className="" />
+                    {/* <TruckAnimation className="" /> */}
                 </div>
                 
-                <h1 className="font-[Georgia] font-bold text-4xl">Sign Up</h1>
+                <h1 className="font-[Georgia] font-bold text-4xl">{nameChange}</h1>
                 
                 <div className="flex flex-wrap justify-center m-2 p-5 gap-7">
 
-                    {/* Email Input */}
+                    {/* Username Input */}
                     <div className="bg-white w-120 h-10 rounded-4xl">
                         <input 
-                            type="email" 
-                            placeholder="Email Address" 
+                            type="text" 
+                            placeholder="Username" 
                             required 
-                            value={formData.email}
-                            onChange={(e) => setFormData({...formData, email: e.target.value})}
+                            value={formData.username}
+                            onChange={(e) => setFormData({...formData, username: e.target.value})}
                             className="text-black focus:outline-none flex p-2 w-full bg-transparent"
                         />
                     </div>
@@ -90,7 +90,7 @@ export default function SignUpDesign({ onSubmit }) {
                             type="submit"
                             className="text-white flex justify-center p-1 w-full hover:scale-150 hover:shadow-xl duration-300 transition-all hover:bg-white hover:text-black"
                         >
-                            <p className="font-bold text-3xl">Sign Up</p>
+                            <p className="font-bold text-3xl">{nameChange}</p>
                         </button>
                     </div>
                 </div>

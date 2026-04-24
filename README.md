@@ -88,9 +88,13 @@ docker compose exec web python manage.py shell -c "from django.core.signing impo
 
 # To create a QR code
 
-"docker compose exec web python makeQR.py"
+docker compose exec web python makeQR.py
 
 # If you get a "column already exists" error, run:
 
 
 docker compose exec web python manage.py migrate app 0003 --fake
+
+# "No migrations to apply" when you made changes: 
+
+docker compose exec web python manage.py makemigrations app
