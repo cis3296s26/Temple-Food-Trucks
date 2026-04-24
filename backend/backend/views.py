@@ -78,9 +78,9 @@ def verify_invite_and_signup(request):
 
 
 @api_view(['POST'])
-def create_food_truck(request):
+def create_food_truck(request):     
     data = request.data
-    
+
     data.setlist(
         "dietaryRestrictions",
         request.data.getlist("dietaryRestrictions")
@@ -95,8 +95,43 @@ def create_food_truck(request):
     if serializer.is_valid():
         
         # should actually use request.user, but getting default user for testing rn
-        # user = request.user
-        user = User.objects.first()
+        user = request.user
+
+        
+        food_truck = serializer.save(owner=user)
+
+        # Handle gallery images separately
+        images = request.FILES.getlist('image_gallery')
+        for img in images:
+            FoodTruckImageGallery.objects.create(
+                food_truck=food_truck,
+                image=img
+            )
+
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['PUT'])
+def modify_food_truck(request):     
+    data = request.data
+
+    data.setlist(
+        "dietaryRestrictions",
+        request.data.getlist("dietaryRestrictions")
+    )
+    
+    price_range_array = [int(request.data.get('minPrice')), int(request.data.get('maxPrice'))]
+    
+    data.setlist("priceRangeArray", price_range_array)
+    
+    serializer = FoodTruckSerializer(FoodTruck.objects.get("id"),data=data)
+
+    if serializer.is_valid():
+        
+        # should actually use request.user, but getting default user for testing rn
+        user = request.user
+        # user = User.objects.first()
         
         food_truck = serializer.save(owner=user)
 

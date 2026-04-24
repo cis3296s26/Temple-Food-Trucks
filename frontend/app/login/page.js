@@ -1,36 +1,54 @@
 "use client";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 import axiosClient from "../axiosClient";
 import { PageMain } from "../components/PageMain";
 import SignUpDesign from "../components/SignUpDesign";
 
 
+
+// This is the login page component that renders the login form and handles user authentication
 export default function Login() {
-  const onSignupSubmit = async (userData) => {
-    // userData should contain email and password
+  // value and onChange handlers for the login form inputs
+  const router = useRouter();
+
+  // This function is called when the login form is submitted
+  const handleLogin = async (formData) => {
     try {
-      const payload = {
-        email: userData.email,
-        password: userData.password
+      // Prepare the payload for the login request
+      const username = formData["username"]
+      const password = formData["password"]
+
+      let payload = {
+        username: username,
+        password: password
       };
-      // Send the signup data to the backend for verification and account creation
-      const response = await axiosClient(
-        "auth/verify-signup/",
-        payload,
-        "",
-        "GET",
-      );
-      // Handle the response from the backend
-      if (response) {
-        alert("Account created! Redirecting to login...");
-        window.location.href = "/login"; // Or wherever your login page is
+
+      console.log(payload)
+
+      // call the login endpoint in urls.py
+      const response = await axiosClient("api/login/", payload, "", "POST");
+
+      // check if the response contains the access token
+      if (response && response.access) {
+        // save tokens for authenticated requests 
+        localStorage.setItem("access_token", response.access);
+        localStorage.setItem("refresh_token", response.refresh);
+
+        console.log(response)
+
+        // Redirect to the trucks page after successful login
+        router.push("/trucks");
       }
+      // handle login failure
     } catch (error) {
-      console.error("Signup Error:", error);
-      alert("Signup failed. The token might be invalid or the email is taken.");
+      console.error("Login Error:", error);
+      alert("Login failed. Please check your credentials.");
     }
   };
 
-  return (
+// Styling component
+return (
     <PageMain>
       <SignUpDesign onSubmit={onSignupSubmit} nameChange={"Login"} />
     </PageMain>
