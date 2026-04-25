@@ -9,7 +9,7 @@ import axiosClient from "../axiosClient";
 import NotificationBanner from "./NotificationBanner";
 import { Truck } from "lucide-react";
 
-export default function SignUpInfoDesign({ truckData, typeOfRequest }) {
+export default function SignUpInfoDesign({ truckData, typeOfRequest, letKnowWhatDoing }) {
   const router = useRouter();
 
   const [typefood, settypefood] = useState("");
@@ -22,7 +22,7 @@ export default function SignUpInfoDesign({ truckData, typeOfRequest }) {
   const [notification, setNotification] = useState(null);
 
   useEffect(() => {
-    if (Object.keys(truckData).length > 0) {
+    if (typeOfRequest == "PUT") {
       // we got a real truck here, we're editing it, not makign a new one
       console.log(truckData);
       truckData["minPrice"] = truckData["priceRangeArray"][0];
@@ -58,7 +58,7 @@ export default function SignUpInfoDesign({ truckData, typeOfRequest }) {
         textarea.value = truckData[textarea.name];
       }
     }
-  }, [truckData]);
+  }, [truckData, typeOfRequest]);
 
   function addFood(e) {
     if (e) {
@@ -176,7 +176,7 @@ export default function SignUpInfoDesign({ truckData, typeOfRequest }) {
 
       <div className="relative w-full px-25 max-w-8/12 bg-linear-to-b border-2 from-white/50 to-black/50 rounded-3xl shadow-xl/30 shadow-black pt-8 pb-12">
         <h1 className="text-4xl font-bold text-center mb-6">
-          Food Truck Registration
+          {letKnowWhatDoing} Your Food Truck
         </h1>
         <Truck className="animate-pulse scale-200 relative bottom-2 left-10"></Truck>
         {/* <TruckAnimation className="animate-truck2 opacity-100" /> */}
@@ -357,7 +357,7 @@ export default function SignUpInfoDesign({ truckData, typeOfRequest }) {
 
           {/* Submit */}
           <button className="w-full py-3 text-xl font-bold bg-black text-white rounded-xl hover:scale-105 border transition">
-            Register
+            {letKnowWhatDoing}
           </button>
         </form>
       </div>

@@ -8,6 +8,7 @@ import axiosClient from "@/app/axiosClient";
 export default function SignUp_Info() {
   const [truck, setTruck] = useState({});
   const [typeOfRequest, setTypeOfRequest] = useState("POST");
+  const [letKnowWhatDoing, setLetKnowWhatDoing] = useState("Create")
 
   useEffect(() => {
     async function getTruck() {
@@ -18,8 +19,14 @@ export default function SignUp_Info() {
         "GET",
       );
 
+      console.log(res)
+
       setTruck(res.truck);
-      setTypeOfRequest("PUT");
+
+      if(Object.keys(res.truck).length > 0){
+          setTypeOfRequest("PUT");
+          setLetKnowWhatDoing("Modify")
+      }
     }
 
     if (localStorage["access_token"]) getTruck();
@@ -30,6 +37,7 @@ export default function SignUp_Info() {
       <SignUpInfoDesign
         truckData={truck}
         typeOfRequest={typeOfRequest}
+        letKnowWhatDoing={letKnowWhatDoing}
       ></SignUpInfoDesign>
     </PageMain>
   );
