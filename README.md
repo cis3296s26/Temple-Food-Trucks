@@ -19,7 +19,7 @@ food truck owners, and visitors of Temple campus alike.
 5. Create a .env file in the root directory of the project
 6. Copy and paste the following into the .env file, replace entries as needed
 '''python
-# Django Settings
+    # Django Settings
     SECRET_KEY=your_local_secret_key_here
     DEBUG=True
 
