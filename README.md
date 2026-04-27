@@ -53,7 +53,9 @@ food truck owners, and visitors of Temple campus alike.
     docker compose exec web python makeQR.py
 
 12. Urls to access the app:
+
     Backend API: localhost:8000/foodtrucks/
+    
     Django admin: localhost:8000/admin/
 
 
