@@ -3,9 +3,10 @@ import token
 import os
 from django.shortcuts import render
 from rest_framework import generics, permissions, status
-from app.models import FoodTruck, FoodTruckImageGallery
+from app.models import FoodTruck, FoodTruckImageGallery, Rating
 from app.serializer import FoodTruckSerializer
 from .permissions import ownerOrReadOnly 
+from django.db.models import Avg
 from django.core.signing import TimestampSigner, SignatureExpired
 from django.http import JsonResponse
 from rest_framework.decorators import api_view, permission_classes
@@ -14,7 +15,7 @@ from django.contrib.auth.models import User
 from rest_framework.response import Response
 from django.contrib.auth.models import Group
 from django.views.decorators.csrf import csrf_exempt
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 import json
 
 # Initialize a TimestampSigner instance for signing and verifying tokens (FOR QR CODE)
@@ -125,9 +126,41 @@ def create_food_truck(request):
 
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+@api_view(["POST"])
+@permission_classes([AllowAny])
+def rate_truck(request, truck_id):
+    user = request.user if request.user.is_authenticated else None
+    value = int(request.data.get("rating"))
+
+    truck = FoodTruck.objects.get(id=truck_id)
+
+    # Create or update rating
+    Rating.objects.update_or_create(
+        user=user,
+        truck=truck,
+        defaults={"value": value}
+    )
+
+    # Recalculate average
+    avg_rating = truck.ratings.aggregate(avg=Avg("value"))["avg"] or 0
+
+    truck.popularity = avg_rating
+    truck.save()
+
+    return Response({
+        "message": "Rating saved",
+        "average": avg_rating
+    })
+
 @api_view(['PUT'])
-def modify_food_truck(request):     
-    data = request.data
+@permission_classes([IsAuthenticated])
+def modify_food_truck(request, pk):     
+    try:
+        food_truck = FoodTruck.objects.get(id=pk, owner=request.user)
+    except FoodTruck.DoesNotExist:
+        return Response({"error": "Truck not found"}, status=404)
+    
+    data = request.data.copy()
 
     data.setlist(
         "dietaryRestrictions",
@@ -138,15 +171,19 @@ def modify_food_truck(request):
     
     data.setlist("priceRangeArray", price_range_array)
     
-    serializer = FoodTruckSerializer(FoodTruck.objects.get("id"),data=data)
+    serializer = FoodTruckSerializer(food_truck,data=data,partial=True)
 
     if serializer.is_valid():
         
-        # should actually use request.user, but getting default user for testing rn
-        user = request.user
-        # user = User.objects.first()
+        food_truck = serializer.save()
         
-        food_truck = serializer.save(owner=user)
+        existing_ids = request.data.getlist("existing_gallery_ids")
+
+        # keep existing pictures
+        if existing_ids:
+            FoodTruckImageGallery.objects.filter(
+                food_truck=food_truck
+            ).exclude(id__in=existing_ids).delete()
 
         # Handle gallery images separately
         images = request.FILES.getlist('image_gallery')
@@ -210,3 +247,17 @@ def get_trucks(request):
     
     serializer = FoodTruckSerializer(queryset, many=True)
     return Response(serializer.data)
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_user(request):
+    user = request.user
+
+    usersTruck = FoodTruck.objects.filter(owner=user).first()
+    
+    context = {
+        'username': user.username,
+        'truck': FoodTruckSerializer(usersTruck).data
+    }
+    
+    return Response(context, 200)
