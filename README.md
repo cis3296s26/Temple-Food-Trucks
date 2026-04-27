@@ -5,8 +5,6 @@ half of them are not listed on google maps, nor is the information on them corre
 if the silver halal truck is open longer than the green halal truck. The intended users will be students, staff,
 food truck owners, and visitors of Temple campus alike. 
 
-![This is a screenshot.](images.png)
-
 <img width="800" height="450" alt="2026-04-2719-33-13-ezgif com-video-to-gif-converter(1)" src="https://github.com/user-attachments/assets/1a92a827-16e6-45f1-8e50-1a96ed1e8072" />
 
 # Local Development Setup
